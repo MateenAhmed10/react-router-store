@@ -1,24 +1,32 @@
-import logo from './logo.svg';
+import React from 'react';
 import './App.css';
+import {
+  BrowserRouter,
+  Routes,
+  Route
+} from 'react-router-dom';
+import Navbar from './components/Navbar';
+
+import Home from './pages/Home';
+import ProductLists from './pages/ProductList';
+import ProductItem from './pages/ProductItem'
+import About from './pages/About'
+import { ContextProvider } from './context/ContextApi';
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ContextProvider>
+      <BrowserRouter>
+        <Navbar />
+        <Routes>
+          <Route path='/' element={<Home />} />
+          <Route path='/products' element={<ProductLists />} />
+          <Route path='/products/product/:id' element={<ProductItem />} />
+          <Route path='/about' element={<About />} />
+        </Routes>
+      </BrowserRouter>
+    </ContextProvider>
   );
 }
 
